@@ -14,7 +14,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = 0.3;
+	$VERSION = 0.4;
 }
 
 
@@ -184,7 +184,7 @@ sub super_path {
 	ref( my $self = shift ) or return undef;
 	
 	# Pass through to Class::ISA
-	return Class::ISA->super_path( $self->{name} );
+	return Class::ISA::super_path( $self->{name} );
 }
 
 # Get the super path including outself
@@ -192,7 +192,7 @@ sub self_and_super_path {
 	ref( my $self = shift ) or return undef;
 	
 	# Pass through to Class::ISA
-	return Class::ISA->self_and_super_path( $self->{name} );
+	return Class::ISA::self_and_super_path( $self->{name} );
 }
 
 # Extra method that ALSO includes UNIVERSAL
@@ -200,7 +200,7 @@ sub full_super_path {
 	ref( my $self = shift ) or return undef;
 	
 	# Get the self and super path part
-	my @path = Class::ISA->self_and_super_path( $self->{name} );
+	my @path = Class::ISA::self_and_super_path( $self->{name} );
 	
 	# Add UNIVERSAL and return 
 	return @path, 'UNIVERSAL';
@@ -274,7 +274,7 @@ Class::Handle - Supply object methods to classes
   # Class::ISA type methods
   $class->super_path();
   $class->self_and_super_path();
-  $class->full_path();
+  $class->full_super_path();
   
   # Loading and unloading
   $class->load();

@@ -25,7 +25,7 @@ SYNOPSIS
       # Class::ISA type methods
       $class->super_path();
       $class->self_and_super_path();
-      $class->full_path();
+      $class->full_super_path();
   
       # Loading and unloading
       $class->load();
