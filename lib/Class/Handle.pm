@@ -4,8 +4,7 @@ package Class::Handle;
 
 # See Pod at end for full docs.
 
-require 5.005;
-
+use 5.005;
 use strict;
 use UNIVERSAL ();
 use Class::ISA ();
@@ -14,7 +13,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '1.01';
+	$VERSION = '1.02';
 }
 
 

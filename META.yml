@@ -1,11 +1,11 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Class-Handle
-version:      1.01
+version:      1.02
 version_from: lib/Class/Handle.pm
 installdirs:  site
 requires:
-    Class::Inspector:              1.04
+    Class::Inspector:              1.06
     Class::ISA:                    0
     Test::More:                    0
 

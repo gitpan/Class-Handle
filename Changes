@@ -1,5 +1,8 @@
 Revision history for Perl extension Class::Handle.
 
+1.02 Wed Jul 21 2004
+	- Forcing the use of the newest 1.06 version of Class::Inspector
+
 1.01 Tue Apr 20 2004
 	- Internals of Class::Interface changed, which broke some tests
 	  Resolved this problem.
