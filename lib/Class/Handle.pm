@@ -14,7 +14,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = 0.1;
+	$VERSION = 0.2;
 }
 
 
@@ -169,7 +169,7 @@ sub methods {
 	
 	# Pass throuh to Class::Inspector.
 	# ( It will check that the class is loaded )
-	return Class::Inspector->methods( $self->{name} );
+	return Class::Inspector->methods( $self->{name}, @_ );
 }
 
 
@@ -269,7 +269,7 @@ Class::Handle - Supply object methods to classes
   $class->functions();
   $class->function_refs();
   $class->function_exists( 'function' );
-  $class->methods();
+  $class->methods( 'public', 'full' );
   
   # Class::ISA type methods
   $class->super_path();
@@ -404,12 +404,16 @@ C<can> method in UNIVERSAL, and hence to every other class. Returns 1 if
 the function exists. Returns 0 if the function does not exist. Returns 
 undef on error, or if the class is not loaded.
 
-=head2 methods()
+=head2 methods( @options )
 
 Attempts to find the methods available to the class. This includes everything
 in the classes super path up to, but NOT including, UNIVERSAL. Returns a 
 reference to an array of the names of all the available methods on success. 
 Returns undef if the class is not loaded.
+
+Any provided options are passed through, and alter the response in the same
+way as for the options to C<Class::Inspector->methods()>, that is, 'public',
+'private', 'full' and 'expanded', and combinations thereof.
 
 =head2 super_path()
 

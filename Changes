@@ -1,5 +1,8 @@
 Revision history for Perl extension Class::Handle.
 
+0.2  Tue May 28 18:47:00 2002
+	- Updating to match ->methods options in Class::Handle
+
 0.1  Thu May 23 21:01:52 2002
 	- original version
 
