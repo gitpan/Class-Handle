@@ -6,10 +6,10 @@ WriteMakefile(
 	'PREREQ_PM'    => {
 		'Test::More'       => 0,
 		'Class::ISA'       => 0,
-		'Class::Inspector' => 1.01,
+		'Class::Inspector' => 1.04,
 	},
 	($] >= 5.005) ? (
 		'AUTHOR'     => 'Adam Kennedy (cpan@ali.as)',
-		'ABSTRACT'   => 'Create objects that are handles to Classes',
+		'ABSTRACT'   => 'Create intrspection handles for classes',
 	) : (),
 );

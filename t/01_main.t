@@ -123,14 +123,14 @@ ok( ! $bad->installed, "->installed detects not installed" );
 my $functions = $ci->functions;
 ok( (isa( $functions, 'ARRAY' )
 	and $functions->[0] eq '_class'
-	and scalar @$functions == 12),
+	and scalar @$functions == 14),
 	"->functions works correctly" );
 ok( ! $bad->functions, "->functions fails correctly" );
 $functions = $ci->function_refs;
 ok( (isa( $functions, 'ARRAY' )
 	and ref $functions->[0]
 	and isa( $functions->[0], 'CODE' )
-	and scalar @$functions == 12),
+	and scalar @$functions == 14),
 	"->function_refs works correctly" );
 ok( ! $bad->function_refs, "->function_refs fails correctly" );
 ok( $ci->function_exists( 'installed' ),
