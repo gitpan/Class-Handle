@@ -95,7 +95,7 @@ ok( $handle->name eq 'Class::Handle::Dummy', "->name returns class name" );
 
 
 # Check the UNIVERSAL related methods
-is( $ch->VERSION, $Class::Handle::VERSION, '->VERSION in static context returns Class::Handle version' );
+ok( $ch->VERSION eq '0.2', '->VERSION in static context returns Class::Handle version' );
 ok( $handle->VERSION eq '12.34', '->VERSION in object context returns handle classes version' );
 ok( $ch->isa( 'UNIVERSAL' ), 'Static ->isa works' );
 ok( $handle->isa( 'Class::Handle::Dummy' ), 'Object ->isa works' );

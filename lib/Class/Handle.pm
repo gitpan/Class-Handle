@@ -14,7 +14,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = 0.2;
+	$VERSION = 0.3;
 }
 
 
