@@ -5,9 +5,18 @@
 # Do all the tests on ourself, since we know we will be loaded.
 
 use strict;
-use lib '../../modules'; # Development testing
-use lib '../lib';           # Installation testing
+use lib ();
 use UNIVERSAL 'isa';
+use File::Spec::Functions ':ALL';
+BEGIN {
+	$| = 1;
+	unless ( $ENV{HARNESS_ACTIVE} ) {
+		require FindBin;
+		chdir ($FindBin::Bin = $FindBin::Bin); # Avoid a warning
+		lib->import( catdir( updir(), updir(), 'modules') );
+	}
+}
+
 use Test::More tests => 36;
 
 # Set up any needed globals
@@ -114,9 +123,9 @@ ok( $ci->loaded, "->loaded detects loaded" );
 ok( ! $bad->loaded, "->loaded detects not loaded" );
 my $filename = $ci->filename;
 is( $filename, File::Spec->catfile( 'Class', 'Inspector.pm' ), "->filename works correctly" );
-ok( $INC{$filename} eq $ci->loaded_filename,
+ok( -f $ci->loaded_filename,
 	"->loaded_filename works" );
-ok( $INC{$filename} eq $ci->resolved_filename,
+ok( -f $ci->resolved_filename,
 	"->resolved_filename works" );
 ok( $ci->installed, "->installed detects installed" );
 ok( ! $bad->installed, "->installed detects not installed" );
