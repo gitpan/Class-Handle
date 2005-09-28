@@ -21,6 +21,7 @@ SYNOPSIS
       $class->function_refs();
       $class->function_exists( 'function' );
       $class->methods( 'public', 'full' );
+      $class->subclasses();
   
       # Class::ISA type methods
       $class->super_path();
@@ -78,25 +79,31 @@ METHODS
 
   VERSION
     Find the version for the class. Does not check that the class is loaded
-    ( at this time ). Returns the version on success. Returns undef if the
-    class does not defined a $VERSION, or the class is not loaded.
+    ( at this time ).
+
+    Returns the version on success, "undef" if the class does not defined a
+    $VERSION or the class is not loaded.
 
   isa $class
     Checks to see if the class is a subclass of another class. Does not
-    check that the class is loaded ( at this time ). Returns true/false as
-    for "UNIVERSAL::isa"
+    check that the class is loaded ( at this time ).
+
+    Returns true/false as for "UNIVERSAL::isa"
 
   can $method
-    Checks to see if a particular method is defined for the class. Returns a
-    "CODE" ref to the function is the method is available. Returns false if
-    the class does not have that method available.
+    Checks to see if a particular method is defined for the class.
+
+    Returns a "CODE" ref to the function is the method is available, or
+    false if the class does not have that method available.
 
   installed
     Checks to see if a particular class is installed on the machine, or at
     least that the class is available to perl. In this case, "class" really
     means "module". This methods cannot detect a class that is not a module.
-    ( Has it's own file ). Returns true if the class is installed and
-    available. Returns false otherwise.
+    ( Has its own file ).
+
+    Returns true if the class is installed and available, or false
+    otherwise.
 
   loaded
     Checks to see if a class is loaded. In this case, "class" does NOT mean
@@ -107,13 +114,14 @@ METHODS
     and "Foo::Buffy", the "loaded" method will return true for all of the
     classes.
 
-    Returns true if the class is loaded. Returns false otherwise.
+    Returns true if the class is loaded, or false otherwise.
 
   filename
     Returns the base filename for a class. For example, for the class
-    "Foo::Bar", "loaded" would return "Foo/Bar.pm". The "filename" method is
-    platform neutral, it should always return the filename in the correct
-    format for your platform.
+    "Foo::Bar", "loaded" would return "Foo/Bar.pm".
+
+    The "filename" method is platform neutral, it should always return the
+    filename in the correct format for your platform.
 
   resolved_filename @extra_paths
     The "resolved_filename" will attempt to find the real file on your
@@ -124,27 +132,32 @@ METHODS
 
   loaded_filename
     If the class is loaded, returns the name of the file that it was
-    originally loaded from. Returns false if the class is not loaded, or did
-    not have it's own file.
+    originally loaded from.
+
+    Returns false if the class is not loaded, or did not have its own file.
 
   functions
     Returns a list of the names of all the functions in the classes
     immediate namespace. Note that this is not the METHODS of the class,
     just the functions. Returns a reference to an array of the function
-    names on success. Returns undef on error or if the class is not loaded.
+    names on success.
+
+    Returns undef on error or if the class is not loaded.
 
   function_refs
     Returns a list of references to all the functions in the classes
-    immediate namespace. Returns a reference to an array of CODE refs of the
-    functions on success. Returns undef on error or if the class is not
-    loaded.
+    immediate namespace.
+
+    Returns a reference to an array of CODE refs of the functions on
+    success, or "undef" on error or if the class is not loaded.
 
   function_exists $function
     Checks to see if the function exists in the class. Note that this is as
     a function, not as a method. To see if a method exists for a class, use
-    the "can" method in UNIVERSAL, and hence to every other class. Returns 1
-    if the function exists. Returns 0 if the function does not exist.
-    Returns undef on error, or if the class is not loaded.
+    the "can" method in UNIVERSAL, and hence to every other class.
+
+    Returns true if the function exists, false if the function does not
+    exist, or "undef" on error, or if the class is not loaded.
 
   methods @options
     Attempts to find the methods available to the class. This includes
@@ -155,6 +168,18 @@ METHODS
     Any provided options are passed through, and alter the response in the
     same way as for the options to "Class::Inspector-"methods()>, that is,
     'public', 'private', 'full' and 'expanded', and combinations thereof.
+
+  subclasses
+    The "subclasses" method will search then entire namespace (and thus all
+    currently loaded classes) to find all of the subclasses of the class
+    handle.
+
+    The actual test will be done by calling "isa" on the class as a static
+    method. (i.e. "My::Class->isa($class)".
+
+    Returns a reference to a list of the names of the loaded classes that
+    match the class provided, or false is none match, or "undef" if the
+    class name provided is invalid.
 
   super_path
     The "super_path" method is a straight pass through to the
@@ -179,23 +204,22 @@ BUGS
 SUPPORT
     Bugs should be reported via the CPAN bug tracking system
 
-    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Class%3A%3AHandle
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Class-Handle>
 
     For other inquiries, contact the author
 
 AUTHOR
-            Adam Kennedy
-            cpan@ali.as
-            http://ali.as/
+    Adam Kennedy <cpan@ali.as>, <http://ali.as/>
 
 SEE ALSO
     "UNIVERSAL", "Class::ISA", and "Class::Inspector", which provide most of
     the functionality for this class.
 
 COPYRIGHT
-    Copyright (c) 2002-2003 Adam Kennedy. All rights reserved. This program
-    is free software; you can redistribute it and/or modify it under the
-    same terms as Perl itself.
+    Copyright (c) 2002 - 2005 Adam Kennedy. All rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 
     The full text of the license can be found in the LICENSE file included
     with this module.

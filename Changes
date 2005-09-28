@@ -1,5 +1,14 @@
 Revision history for Perl extension Class::Handle.
 
+1.04 Wed Sep 28 2005
+	- Added ->subclasses from Class::Inspector 1.12 (nothingmuch/NUFFIN)
+	- To answer a question from the relevant bug, I won't be making
+	  new methods appear automatically as it is very unwise to make
+	  a modules API morph based on functionality in another dist.
+	  It Class::Handle and Class::Inspector were in the same dist,
+	  this might be a different story.
+	- Upgraded Makefile.PL to Module::Install
+
 1.03 Wed Jul 21 2004
 	- Tweaking the tests to work properly on Win32
 

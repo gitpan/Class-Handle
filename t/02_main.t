@@ -17,40 +17,18 @@ BEGIN {
 	}
 }
 
+use Class::Handle;
 use Test::More tests => 36;
 
 # Set up any needed globals
-use vars qw{$loaded $ch $bad};
+use vars qw{$ch $bad};
 BEGIN {
-	$loaded = 0;
-	$| = 1;
-
 	# To make maintaining this a little faster,
-	# $ci is defined as Class::Inspector, and
+	# $CI is defined as Class::Inspector, and
 	# $bad for a class we know doesn't exist.
 	$ch = 'Class::Handle';
 	$bad = 'Class::Handle::Nonexistant';
 }
-
-
-
-
-
-# Check their perl version
-BEGIN {
-	ok( $] >= 5.005, "Your perl is new enough" );
-}
-
-
-
-
-
-# Does the module load
-END { ok( 0, 'Loads' ) unless $loaded; }
-use Class::Handle;
-$loaded = 1;
-ok( 1, 'Loads' );
-
 
 
 
@@ -70,6 +48,7 @@ ok( ! $ch->new( 'Blah::%f' ), 'Constructor catches bad characters' );
 
 
 # Create a dummy class for the remainder of the test
+{
 package Class::Handle::Dummy;
 
 use strict;
@@ -83,21 +62,20 @@ BEGIN {
 sub dummy1 { 1; }
 sub dummy2 { 2; }
 sub dummy3 { 3; }
-
-package main;
+}
 
 
 
 
 
 # Check a newly returned object
-my $handle = $ch->new( 'Class::Handle::Dummy' );
-ok( isa( $handle, 'HASH' ), 'New object is a hash reference' );
-ok( isa( $handle, 'Class::Handle' ), 'New object is correctly blessed' );
-ok( (scalar keys %$handle == 1), 'Object contains only one key' );
-ok( exists $handle->{name}, "The key is named correctly" );
-ok( $handle->{name} eq 'Class::Handle::Dummy', "The contents of the key is correct" );
-ok( $handle->name eq 'Class::Handle::Dummy', "->name returns class name" );
+my $DUMMY = $ch->new( 'Class::Handle::Dummy' );
+ok( isa( $DUMMY, 'HASH' ), 'New object is a hash reference' );
+ok( isa( $DUMMY, 'Class::Handle' ), 'New object is correctly blessed' );
+ok( (scalar keys %$DUMMY == 1), 'Object contains only one key' );
+ok( exists $DUMMY->{name}, "The key is named correctly" );
+ok( $DUMMY->{name} eq 'Class::Handle::Dummy', "The contents of the key is correct" );
+ok( $DUMMY->name eq 'Class::Handle::Dummy', "->name returns class name" );
 
 
 
@@ -105,52 +83,59 @@ ok( $handle->name eq 'Class::Handle::Dummy', "->name returns class name" );
 
 # Check the UNIVERSAL related methods
 is( $ch->VERSION, $Class::Handle::VERSION, '->VERSION in static context returns Class::Handle version' );
-ok( $handle->VERSION eq '12.34', '->VERSION in object context returns handle classes version' );
+ok( $DUMMY->VERSION eq '12.34', '->VERSION in object context returns handle classes version' );
 ok( $ch->isa( 'UNIVERSAL' ), 'Static ->isa works' );
-ok( $handle->isa( 'Class::Handle::Dummy' ), 'Object ->isa works' );
+ok( $DUMMY->isa( 'Class::Handle::Dummy' ), 'Object ->isa works' );
 ok( $ch->can( 'new' ), 'Static ->can works' );
-ok( $handle->can( 'dummy1' ), 'Object ->can works' );
+ok( $DUMMY->can( 'dummy1' ), 'Object ->can works' );
 
 
 
 
 
 # Check the Class::Inspector related methods
-my $ci = Class::Handle->new( 'Class::Inspector' );
+my $CI  = Class::Handle->new( 'Class::Inspector' );
 my $bad = Class::Handle->new( 'Class::Handle::Nonexistant' );
 
-ok( $ci->loaded, "->loaded detects loaded" );
+ok( $CI->loaded, "->loaded detects loaded" );
 ok( ! $bad->loaded, "->loaded detects not loaded" );
-my $filename = $ci->filename;
+my $filename = $CI->filename;
 is( $filename, File::Spec->catfile( 'Class', 'Inspector.pm' ), "->filename works correctly" );
-ok( -f $ci->loaded_filename,
+ok( -f $CI->loaded_filename,
 	"->loaded_filename works" );
-ok( -f $ci->resolved_filename,
+ok( -f $CI->resolved_filename,
 	"->resolved_filename works" );
-ok( $ci->installed, "->installed detects installed" );
+ok( $CI->installed, "->installed detects installed" );
 ok( ! $bad->installed, "->installed detects not installed" );
-my $functions = $ci->functions;
+my $functions = $CI->functions;
 ok( (isa( $functions, 'ARRAY' )
 	and $functions->[0] eq '_class'
-	and scalar @$functions == 14),
+	and scalar @$functions >= 14),
 	"->functions works correctly" );
 ok( ! $bad->functions, "->functions fails correctly" );
-$functions = $ci->function_refs;
+$functions = $CI->function_refs;
 ok( (isa( $functions, 'ARRAY' )
 	and ref $functions->[0]
 	and isa( $functions->[0], 'CODE' )
-	and scalar @$functions == 14),
+	and scalar @$functions >= 14),
 	"->function_refs works correctly" );
 ok( ! $bad->function_refs, "->function_refs fails correctly" );
-ok( $ci->function_exists( 'installed' ),
+ok( $CI->function_exists( 'installed' ),
 	"->function_exists detects function that exists" );
-ok( ! $ci->function_exists('nsfladf' ),
+ok( ! $CI->function_exists('nsfladf' ),
 	"->function_exists fails for bad function" );
-ok( ! $ci->function_exists,
+ok( ! $CI->function_exists,
 	"->function_exists fails for missing function" );
+
+my $CH = $ch->new( $ch );
+isa_ok( $CH, $ch );
+my $subclasses = $CH->subclasses;
+is_deeply( $subclasses, [ 'Class::Handle::Dummy' ],
+	'->subclasses returns as expected' );
 
 
 
 
 
 # Tests for Class::ISA related methods
+# missing, ugh

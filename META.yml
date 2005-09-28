@@ -1,13 +1,17 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Class-Handle
-version:      1.03
-version_from: lib/Class/Handle.pm
-installdirs:  site
-requires:
-    Class::Inspector:              1.06
-    Class::ISA:                    0
-    Test::More:                    0
-
+name: Class-Handle
+version: 1.04
+abstract: Introspection-handle objects for classes
+author: Adam Kennedy <cpan@ali.as>
+license: unknown
 distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.16
+build_requires:
+  File::Spec: 0.80
+  Test::More: 0.47
+requires:
+  perl: 5.005
+  Class::ISA: 0
+  Class::Inspector: 1.12
+no_index:
+  directory:
+    - inc
+generated_by: Module::Install version 0.37

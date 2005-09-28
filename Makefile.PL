@@ -1,15 +1,14 @@
-require 5.000;
-use ExtUtils::MakeMaker;
-WriteMakefile(
-	'NAME'         => 'Class::Handle',
-	'VERSION_FROM' => 'lib/Class/Handle.pm',
-	'PREREQ_PM'    => {
-		'Test::More'       => 0,
-		'Class::ISA'       => 0,
-		'Class::Inspector' => 1.06,
-	},
-	($] >= 5.005) ? (
-		'AUTHOR'     => 'Adam Kennedy (cpan@ali.as)',
-		'ABSTRACT'   => 'Create intrspection handles for classes',
-	) : (),
-);
+use inc::Module::Install;
+
+name           ( 'Class-Handle'                );
+abstract       ( 'Introspection-handle objects for classes' );
+author         ( 'Adam Kennedy <cpan@ali.as>'  );
+version_from   ( 'lib/Class/Handle.pm'         );
+requires       ( 'perl'             => '5.005' );
+requires       ( 'Class::ISA'       => 0       );
+requires       ( 'Class::Inspector' => '1.12'  );
+build_requires ( 'File::Spec'       => '0.80'  );
+build_requires ( 'Test::More'       => '0.47'  );
+auto_install   (                               );
+
+&WriteAll;
