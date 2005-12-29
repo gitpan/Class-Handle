@@ -55,7 +55,7 @@ tasks relating to classes.
 
 To ensure we maintain compliance with other classes that rely on
 methods provided by C<UNIVERSAL>, Class::Handle acts in the normal way when
-something like C<Class::Handle->VERSION> is called. That is, it returns the
+something like C<<Class::Handle->VERSION>> is called. That is, it returns the
 version of Class::Handle itself. When C<UNIVERSAL> methods are called on
 an instantiation the method is changed to act on the class we have a handle
 to. For example, the two following statements are equivalent.
@@ -82,7 +82,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '1.04';
+	$VERSION = '1.05';
 }
 
 
@@ -361,7 +361,7 @@ reference to an array of the names of all the available methods on success.
 Returns undef if the class is not loaded.
 
 Any provided options are passed through, and alter the response in the same
-way as for the options to C<Class::Inspector->methods()>, that is, 'public',
+way as for the options to C<<Class::Inspector->methods()>>, that is, 'public',
 'private', 'full' and 'expanded', and combinations thereof.
 
 =cut
@@ -380,7 +380,7 @@ B<all> currently loaded classes) to find all of the subclasses of the
 class handle.
 
 The actual test will be done by calling C<isa> on the class as a static
-method. (i.e. C<My::Class-E<gt>isa($class)>.
+method. (i.e. C<<My::Class->isa($class)>>.
 
 Returns a reference to a list of the names of the loaded classes that match
 the class provided, or false is none match, or C<undef> if the class name

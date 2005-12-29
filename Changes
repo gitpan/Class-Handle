@@ -1,5 +1,9 @@
 Revision history for Perl extension Class::Handle.
 
+1.05 Fri Dec 30 2005
+	- Fixed a number of POD bugs (Ricardo Signes)
+	- Upgraded Makefile.PL to use Module::Install
+
 1.04 Wed Sep 28 2005
 	- Added ->subclasses from Class::Inspector 1.12 (nothingmuch/NUFFIN)
 	- To answer a question from the relevant bug, I won't be making

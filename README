@@ -49,7 +49,7 @@ DESCRIPTION
 UNIVERSAL API
     To ensure we maintain compliance with other classes that rely on methods
     provided by "UNIVERSAL", Class::Handle acts in the normal way when
-    something like "Class::Handle-"VERSION> is called. That is, it returns
+    something like "<Class::Handle-"VERSION>> is called. That is, it returns
     the version of Class::Handle itself. When "UNIVERSAL" methods are called
     on an instantiation the method is changed to act on the class we have a
     handle to. For example, the two following statements are equivalent.
@@ -166,7 +166,7 @@ METHODS
     available methods on success. Returns undef if the class is not loaded.
 
     Any provided options are passed through, and alter the response in the
-    same way as for the options to "Class::Inspector-"methods()>, that is,
+    same way as for the options to "<Class::Inspector-"methods()>>, that is,
     'public', 'private', 'full' and 'expanded', and combinations thereof.
 
   subclasses
@@ -175,7 +175,7 @@ METHODS
     handle.
 
     The actual test will be done by calling "isa" on the class as a static
-    method. (i.e. "My::Class->isa($class)".
+    method. (i.e. "<My::Class-"isa($class)>>.
 
     Returns a reference to a list of the names of the loaded classes that
     match the class provided, or false is none match, or "undef" if the

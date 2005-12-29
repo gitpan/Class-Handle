@@ -1,17 +1,18 @@
-name: Class-Handle
-version: 1.04
-abstract: Introspection-handle objects for classes
-author: Adam Kennedy <cpan@ali.as>
-license: unknown
-distribution_type: module
+abstract: Create objects that are handles to Classes
+author: 'Adam Kennedy <cpan@ali.as>, L<http://ali.as/>'
 build_requires:
   File::Spec: 0.80
   Test::More: 0.47
-requires:
-  perl: 5.005
-  Class::ISA: 0
-  Class::Inspector: 1.12
+distribution_type: module
+generated_by: Module::Install version 0.50
+license: perl
+name: Class-Handle
 no_index:
   directory:
     - inc
-generated_by: Module::Install version 0.37
+    - t
+requires:
+  Class::ISA: 0
+  Class::Inspector: 1.12
+  perl: 5.005
+version: 1.05
