@@ -4,7 +4,7 @@ build_requires:
   File::Spec: 0.80
   Test::More: 0.47
 distribution_type: module
-generated_by: Module::Install version 0.50
+generated_by: Module::Install version 0.62
 license: perl
 name: Class-Handle
 no_index:
@@ -12,7 +12,7 @@ no_index:
     - inc
     - t
 requires:
-  Class::ISA: 0
+  Class::ISA: 0.31
   Class::Inspector: 1.12
   perl: 5.005
-version: 1.05
+version: 1.06

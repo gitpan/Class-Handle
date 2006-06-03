@@ -82,7 +82,7 @@ use Class::Inspector ();
 # Set the version
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '1.05';
+	$VERSION = '1.06';
 }
 
 
@@ -467,7 +467,7 @@ sub load {
 	return 1 if Class::Inspector->loaded( $self->{name} );
 
 	# Get the resolved file name
-	my $filename = $self->resolve_filename() or return undef;
+	my $filename = $self->resolved_filename() or return undef;
 
 	# Load the class
 	require $filename or return undef;
@@ -506,7 +506,7 @@ most of the functionality for this class.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2002 - 2005 Adam Kennedy. All rights reserved.
+Copyright (c) 2002 - 2006 Adam Kennedy. All rights reserved.
 
 This program is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.

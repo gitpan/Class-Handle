@@ -1,5 +1,11 @@
 Revision history for Perl extension Class::Handle.
 
+1.06 Sun  4 Jun 2006
+	- Fixed bug #18553 (resolve_filename in sub load)
+	- Moved from old CVS to new SVN repository
+	- Upgraded to Module::Install 0.62
+	- Added a proper version in the Class::ISA dependency
+
 1.05 Fri Dec 30 2005
 	- Fixed a number of POD bugs (Ricardo Signes)
 	- Upgraded Makefile.PL to use Module::Install

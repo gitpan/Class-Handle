@@ -6,14 +6,18 @@
 
 use strict;
 use lib ();
-use UNIVERSAL 'isa';
 use File::Spec::Functions ':ALL';
 BEGIN {
 	$| = 1;
 	unless ( $ENV{HARNESS_ACTIVE} ) {
 		require FindBin;
-		chdir ($FindBin::Bin = $FindBin::Bin); # Avoid a warning
-		lib->import( catdir( updir(), updir(), 'modules') );
+		$FindBin::Bin = $FindBin::Bin; # Avoid a warning
+		chdir catdir( $FindBin::Bin, updir() );
+		lib->import(
+			catdir('blib', 'arch'),
+			catdir('blib', 'lib' ),
+			catdir('lib'),
+			);
 	}
 }
 
@@ -70,8 +74,8 @@ sub dummy3 { 3; }
 
 # Check a newly returned object
 my $DUMMY = $ch->new( 'Class::Handle::Dummy' );
-ok( isa( $DUMMY, 'HASH' ), 'New object is a hash reference' );
-ok( isa( $DUMMY, 'Class::Handle' ), 'New object is correctly blessed' );
+ok( UNIVERSAL::isa( $DUMMY, 'HASH' ), 'New object is a hash reference' );
+isa_ok( $DUMMY, 'Class::Handle' );
 ok( (scalar keys %$DUMMY == 1), 'Object contains only one key' );
 ok( exists $DUMMY->{name}, "The key is named correctly" );
 ok( $DUMMY->{name} eq 'Class::Handle::Dummy', "The contents of the key is correct" );
@@ -108,15 +112,15 @@ ok( -f $CI->resolved_filename,
 ok( $CI->installed, "->installed detects installed" );
 ok( ! $bad->installed, "->installed detects not installed" );
 my $functions = $CI->functions;
-ok( (isa( $functions, 'ARRAY' )
+ok( (ref($functions) eq 'ARRAY'
 	and $functions->[0] eq '_class'
 	and scalar @$functions >= 14),
 	"->functions works correctly" );
 ok( ! $bad->functions, "->functions fails correctly" );
 $functions = $CI->function_refs;
-ok( (isa( $functions, 'ARRAY' )
+ok( (ref($functions) eq 'ARRAY'
 	and ref $functions->[0]
-	and isa( $functions->[0], 'CODE' )
+	and ref($functions->[0]) eq 'CODE'
 	and scalar @$functions >= 14),
 	"->function_refs works correctly" );
 ok( ! $bad->function_refs, "->function_refs fails correctly" );
