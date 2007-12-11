@@ -209,14 +209,14 @@ SUPPORT
     For other inquiries, contact the author
 
 AUTHOR
-    Adam Kennedy <cpan@ali.as>, <http://ali.as/>
+    Adam Kennedy <adamk@cpan.org>, <http://ali.as/>
 
 SEE ALSO
     "UNIVERSAL", "Class::ISA", and "Class::Inspector", which provide most of
     the functionality for this class.
 
 COPYRIGHT
-    Copyright (c) 2002 - 2006 Adam Kennedy. All rights reserved.
+    Copyright (c) 2002 - 2006 Adam Kennedy.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
